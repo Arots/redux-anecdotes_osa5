@@ -32,6 +32,7 @@ const reducer = (state = initialState, action) => {
       console.log(likeAdded)
       state = state.map(anecdote => anecdote.id === likeAdded.id ? likeAdded : anecdote)
       console.log(state)
+      state = state.sort((a, b) => a.votes - b.votes).reverse()
       return state
   }
   
