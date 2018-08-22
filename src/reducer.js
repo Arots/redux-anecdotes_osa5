@@ -24,7 +24,9 @@ const reducer = (state = initialState, action) => {
   console.log('action', action)
   switch (action.type) {
     case 'NEW ANECDOTE':
-      return
+      const newAnecdote = asObject(action.data.content)
+      state = state.concat(newAnecdote)
+      return state
     case 'ADD VOTE':
       const addingLike = state.find(anecdote => anecdote.id === action.data.id)
       const likeAdded = {...addingLike, votes: addingLike.votes + 1}

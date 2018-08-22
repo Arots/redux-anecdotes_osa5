@@ -1,7 +1,16 @@
 import React from 'react';
 
-
 class App extends React.Component {
+
+  addAnecdote = (event) => {
+    event.preventDefault()
+    this.props.store.dispatch({ 
+      type: 'NEW ANECDOTE', 
+      data: { content: event.target.anecdote.value } 
+    })
+    event.target.anecdote.value = ''
+  }
+
   render() {
     const anecdotes = this.props.store.getState()
     return (
@@ -22,9 +31,8 @@ class App extends React.Component {
           </div>
         )}
         <h2>create new</h2>
-        <form onSubmit={e => 
-          this.props.store.dispatch({ type: 'NEW ANECDOTE'})}>
-          <div><input /></div>
+        <form onSubmit={event => this.addAnecdote(event)}>
+          <div><input name="anecdote"/></div>
           <button type="submit">create</button> 
         </form>
       </div>
